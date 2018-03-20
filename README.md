@@ -1,6 +1,6 @@
-# wxmp-demo
+# Mpvue Typescript demo
 
-> A Mpvue project
+> A Mpvue project with Typescript
 
 ## Build Setup
 
