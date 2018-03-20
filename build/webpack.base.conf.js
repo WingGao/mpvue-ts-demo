@@ -61,14 +61,6 @@ module.exports = {
         loader: 'mpvue-loader',
         options: vueLoaderConfig
       },
-      // {
-      //   test: /\.tsx?$/,
-      //   loader: 'awesome-typescript-loader',
-      //   exclude: /node_modules/,
-      //   options: {
-      //     appendTsSuffixTo: [/\.vue$/],
-      //   }
-      // },
       {
         test: /\.tsx?$/,
         // include: [resolve('src'), resolve('test')],
@@ -85,8 +77,7 @@ module.exports = {
             // loader: 'ts-loader',
             loader: 'awesome-typescript-loader',
             options: {
-              // appendTsSuffixTo: [/\.vue$/],
-              errorsAsWarnings: true,
+              // errorsAsWarnings: true,
               useCache: true,
             }
           }
