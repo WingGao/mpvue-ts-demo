@@ -1,7 +1,7 @@
 <template>
   <div class="counter-warp">
-    <p>Vuex counter：{{counter}}</p>
-    <a :href="AppUrls.COUNTER" class="home">去往计算</a>
+    <p>Mpvue</p>
+    <a :href="AppUrls.COUNTER" class="home">去往vuex</a>
   </div>
 </template>
 

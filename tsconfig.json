@@ -23,6 +23,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
+    "skipLibCheck": true,
     "experimentalDecorators": true
   },
   "include": [
