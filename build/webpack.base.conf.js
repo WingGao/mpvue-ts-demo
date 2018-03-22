@@ -21,7 +21,7 @@ function getEntry(dir, entryFile) {
 }
 
 const appEntry = { app: resolve('./src/main.ts') }
-const pagesEntry = getEntry(resolve('./src/pages'), 'main.js')
+const pagesEntry = getEntry(resolve('./src/pages'), 'main.ts')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
 module.exports = {

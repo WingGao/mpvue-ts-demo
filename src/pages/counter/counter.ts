@@ -8,10 +8,9 @@ const debug = require('debug')('log:Page/Counter')
 export default class Counter extends Vue {
   AppUrls = AppUrls
 
-  computed = {
-    count() {
-      return store.state.count
-    }
+  // computed
+  get count () {
+    return store.state.count
   }
 
   increment() {
