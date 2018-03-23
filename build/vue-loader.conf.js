@@ -11,18 +11,17 @@ module.exports = {
       : config.dev.cssSourceMap,
     extract: isProduction
   }), {
-    // ts: [
-    //   'babel-loader',
-    //   {
-    //     // loader: 'ts-loader',
-    //     loader: 'awesome-typescript-loader',
-    //     options: {
-    //       // appendTsSuffixTo: [/\.vue$/],
-    //       errorsAsWarnings: true,
-    //       useCache: true,
-    //     }
-    //   }
-    // ]
+    ts: [
+      'babel-loader',
+      {
+        // loader: 'ts-loader',
+        loader: 'awesome-typescript-loader',
+        options: {
+          // errorsAsWarnings: true,
+          useCache: true,
+        }
+      }
+    ]
   }),
   transformToRequire: {
     video: 'src',

@@ -1,5 +1,5 @@
 const pre = '/pages'
 export const AppUrls = {
-  INDEX: pre + '/index/index',
-  COUNTER: pre + '/counter/counter',
+  INDEX: pre + '/index/main',
+  COUNTER: pre + '/counter/main',
 }

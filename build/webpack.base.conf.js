@@ -4,24 +4,24 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var glob = require('glob')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry(dir, entryFile) {
-  const files = fs.readdirSync(dir)
-  return files.reduce((res, k) => {
-    const page = path.resolve(dir, k, entryFile)
-    if (fs.existsSync(page)) {
-      res[k] = page
-    }
+function getEntry (rootSrc, pattern) {
+  var files = glob.sync(path.resolve(rootSrc, pattern))
+  return files.reduce((res, file) => {
+    var info = path.parse(file)
+    var key = info.dir.slice(rootSrc.length + 1) + '/' + info.name
+    res[key] = path.resolve(file)
     return res
   }, {})
 }
 
 const appEntry = { app: resolve('./src/main.ts') }
-const pagesEntry = getEntry(resolve('./src/pages'), 'main.ts')
+const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.ts')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
 module.exports = {
