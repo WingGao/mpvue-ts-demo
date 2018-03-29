@@ -1,4 +1,4 @@
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator'
 import { AppUrls } from '@/utils/consts.ts'
 import Card from '@/components/card.vue' // mpvue目前只支持的单文件组件
 

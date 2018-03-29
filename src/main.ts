@@ -15,7 +15,7 @@ Component.registerHooks([
   'onReachBottom', // 页面上拉触底事件的处理函数
   'onShareAppMessage', // 用户点击右上角分享
   'onPageScroll', // 页面滚动
-  'onTabItemTap', //当前是 tab 页时 // 点击 tab 时触发 （mpvue 0.0.16 支持）
+  'onTabItemTap', //当前是 tab 页时， 点击 tab 时触发 （mpvue 0.0.16 支持）
 ])
 // MyApp.mpType = 'app'
 
