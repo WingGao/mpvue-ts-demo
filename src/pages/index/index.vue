@@ -2,7 +2,7 @@
   <div class="counter-warp">
     <p>Mpvue</p>
     <p>ts value {{ ver }}</p>
-    <card text="card component12"></card>
+    <card text="card component"></card>
     <a :href="AppUrls.COUNTER" class="home">去往vuex</a>
   </div>
 </template>
