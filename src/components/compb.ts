@@ -1,6 +1,6 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
-const debug = require('debug')('log:Comp/Card2')
+const debug = require('debug')('log:Comp/CompB')
 
 // 必须使用装饰器的方式来指定component
 @Component({
@@ -8,7 +8,7 @@ const debug = require('debug')('log:Comp/Card2')
   //   text: String
   // }
 })
-class Card2 extends Vue {
+class CompB extends Vue {
   @Prop({ default: '1' }) //注意用法！
   text: string;
 
@@ -27,4 +27,4 @@ class Card2 extends Vue {
   }
 }
 
-export default Card2
+export default CompB

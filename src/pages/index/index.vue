@@ -3,7 +3,8 @@
     <p>Mpvue</p>
     <p>ts value {{ ver }}</p>
     <card text="card component"></card>
-    <card2 text="hello2"></card2>
+    <comp-b text="hello2"></comp-b>
+    <comp-alias text="hello3"></comp-alias>
     <a :href="AppUrls.COUNTER" class="home">去往vuex</a>
   </div>
 </template>
