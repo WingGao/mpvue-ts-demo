@@ -8,15 +8,16 @@ var glob = require('glob')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MpvuePlugin = require('webpack-mpvue-asset-plugin')
 var relative = require('relative')
+
 // const MpvueEntry = require('mpvue-entry')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry (rootSrc) {
+function getEntry(rootSrc, gb = '/pages/**/main.ts') {
   var map = {};
-  glob.sync(rootSrc + '/pages/**/main.ts')
+  glob.sync(rootSrc + gb)
     .forEach(file => {
       var key = relative(rootSrc, file).replace('.ts', '');
       map[key] = file;
@@ -26,9 +27,9 @@ function getEntry (rootSrc) {
 
 const appEntry = { app: resolve('./src/main.ts') }
 const pagesEntry = getEntry(resolve('./src'))
-//分包
-const subpackagePagesEntry = getEntry(resolve('./src'), 'packageA/pages/**/main.ts')
-const entry = Object.assign({}, appEntry, pagesEntry)
+//分包A
+const subpackagePagesEntry = getEntry(resolve('./src'), '/packageA/pages/**/main.ts')
+const entry = Object.assign({}, appEntry, pagesEntry, subpackagePagesEntry)
 
 module.exports = {
   entry: entry, // 如果要自定义生成的 dist 目录里面的文件路径，

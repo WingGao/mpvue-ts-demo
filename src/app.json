@@ -5,7 +5,14 @@
     "pages/counter/main",
     "pages/page2/main"
   ],
-
+  "subPackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "pages/index/main"
+      ]
+    }
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
