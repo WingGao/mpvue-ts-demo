@@ -1,6 +1,10 @@
 import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from 'vue-property-decorator';
 import { VueConstructor } from "vue";
 
+let isApp = false; //尝试mpvue-entry
+let MyApp;
+/* app-only-begin */
+isApp = true;
 interface IMpVue extends VueConstructor {
   mpType: string
 }
@@ -25,23 +29,15 @@ Component.registerHooks([
 ])
 
 Vue.config.productionTip = false
-// 在这个地方引入是为了registerHooks先执行
-const MyApp = require('./App.vue').default as IMpVue
+/* app-only-end */
 
+if (isApp) {
+  // 在这个地方引入是为了registerHooks先执行
+  MyApp = require('./App.vue').default as IMpVue
+}else {
+  // MyApp = require('./index.vue')
+}
 
 
 const app = new Vue(MyApp)
 app.$mount()
-
-export default {
-  // 这个字段走 app.json
-  config: {
-    pages: ['^pages/index/main'], // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    }
-  }
-}

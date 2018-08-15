@@ -11,6 +11,7 @@
 	"compileType": "miniprogram",
 	"appid": "touristappid",
 	"projectname": "wxmp-demo",
+	"libVersion": "2.2.1",
 	"condition": {
 		"search": {
 			"current": -1,

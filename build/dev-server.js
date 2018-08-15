@@ -10,6 +10,7 @@ var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
+var portfinder = require('portfinder')
 var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
@@ -27,12 +28,12 @@ var compiler = webpack(webpackConfig)
 //   publicPath: webpackConfig.output.publicPath,
 //   quiet: true
 // })
-//
+
 // var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 //   log: false,
 //   heartbeat: 2000
 // })
-// // force page reload when html-webpack-plugin template changes
+// force page reload when html-webpack-plugin template changes
 // compiler.plugin('compilation', function (compilation) {
 //   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
 //     hotMiddleware.publish({ action: 'reload' })
@@ -63,7 +64,7 @@ app.use(require('connect-history-api-fallback')())
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-var uri = 'http://localhost:' + port
+// var uri = 'http://localhost:' + port
 
 var _resolve
 var readyPromise = new Promise(resolve => {
@@ -75,20 +76,31 @@ var readyPromise = new Promise(resolve => {
 //   console.log('> Listening at ' + uri + '\n')
 //   // when env is testing, don't need open it
 //   if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-//     // opn(uri)
+//     opn(uri)
 //   }
 //   _resolve()
 // })
-var server = app.listen(port, 'localhost')
-// for 小程序的文件保存机制
-require('webpack-dev-middleware-hard-disk')(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  quiet: true
-})
 
-module.exports = {
-  ready: readyPromise,
-  close: () => {
-    server.close()
-  }
-}
+module.exports = new Promise((resolve, reject) => {
+  portfinder.basePort = port
+  portfinder.getPortPromise()
+  .then(newPort => {
+      if (port !== newPort) {
+        console.log(`${port}端口被占用，开启新端口${newPort}`)
+      }
+      var server = app.listen(newPort, 'localhost')
+      // for 小程序的文件保存机制
+      require('webpack-dev-middleware-hard-disk')(compiler, {
+        publicPath: webpackConfig.output.publicPath,
+        quiet: true
+      })
+      resolve({
+        ready: readyPromise,
+        close: () => {
+          server.close()
+        }
+      })
+  }).catch(error => {
+    console.log('没有找到空闲端口，请打开任务管理器杀死进程端口再试', error)
+  })
+})

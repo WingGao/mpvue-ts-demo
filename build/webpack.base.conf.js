@@ -5,29 +5,40 @@ var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var glob = require('glob')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MpvuePlugin = require('webpack-mpvue-asset-plugin')
+var relative = require('relative')
+// const MpvueEntry = require('mpvue-entry')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry (rootSrc, pattern) {
-  var files = glob.sync(path.resolve(rootSrc, pattern))
-  return files.reduce((res, file) => {
-    var info = path.parse(file)
-    var key = info.dir.slice(rootSrc.length + 1) + '/' + info.name
-    res[key] = path.resolve(file)
-    return res
-  }, {})
+function getEntry (rootSrc) {
+  var map = {};
+  glob.sync(rootSrc + '/pages/**/main.ts')
+    .forEach(file => {
+      var key = relative(rootSrc, file).replace('.ts', '');
+      map[key] = file;
+    })
+  return map;
 }
 
 const appEntry = { app: resolve('./src/main.ts') }
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.ts')
+const pagesEntry = getEntry(resolve('./src'))
+//分包
+const subpackagePagesEntry = getEntry(resolve('./src'), 'packageA/pages/**/main.ts')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
 module.exports = {
   entry: entry, // 如果要自定义生成的 dist 目录里面的文件路径，
                 // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
                 // toPath 为相对于 dist 的路径, 例：index/demo，则生成的文件地址为 dist/index/demo.js
+  // entry: MpvueEntry.getEntry({
+  //   main: 'src/main.ts',
+  //   pages: 'src/pages.js',
+  //   // entry: 'dist',
+  // }),
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
@@ -138,5 +149,26 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new MpvuePlugin(),
+    // new MpvueEntry(),
+    // new CopyWebpackPlugin([{
+    //   from: resolve('./src/app.json'),
+    //   to: 'app.json'
+    // }]),
+    new CopyWebpackPlugin([{
+      from: '**/*.json',
+      to: ''
+    }], {
+      context: 'src/'
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: path.resolve(__dirname, '../dist/static'),
+        ignore: ['.*']
+      }
+    ])
+  ]
 }

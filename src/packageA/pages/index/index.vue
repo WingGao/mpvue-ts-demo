@@ -1,14 +1,12 @@
 <template>
   <div class="counter-warp">
-    <p>Mpvue</p>
+    <p>PackageA</p>
     <p>ts value {{ ver }}</p>
     <card text="card component"></card>
-    <comp-b text="hello2"></comp-b>
-    <comp-alias text="hello3"></comp-alias>
     <a :href="AppUrls.COUNTER" class="home">去往vuex</a>
   </div>
 </template>
-<!--必须指定为ts1-->
+<!--必须指定为ts-->
 <script lang="ts" src="./index.ts">
 </script>
 
@@ -24,7 +22,7 @@
     margin: 100px auto;
     padding: 5px 10px;
     color: blue;
-    border: 1px solid blue;
+    border: 12px solid blue;
   }
 
 </style>

@@ -1,3 +1,4 @@
+<!-- 这是一个原生vue单文件 -->
 <template>
   <div>
     <p class="card">
