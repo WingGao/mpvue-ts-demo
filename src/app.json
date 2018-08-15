@@ -3,7 +3,8 @@
     "pages/index/main",
     "pages/logs/main",
     "pages/counter/main",
-    "pages/page2/main"
+    "pages/page2/main",
+    "pages/testExtend/main"
   ],
   "subPackages": [
     {

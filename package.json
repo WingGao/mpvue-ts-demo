@@ -14,7 +14,7 @@
     "debug": "^3.1.0",
     "mpvue": "^1.0.13",
     "vue": "^2.5.16",
-    "vue-property-decorator": "^6.0.0",
+    "vue-property-decorator": "^7.0.0",
     "vuex": "^2.3.1"
   },
   "devDependencies": {

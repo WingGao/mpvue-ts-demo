@@ -7,9 +7,10 @@
     <comp-alias text="hello3"></comp-alias>
     <a :href="AppUrls.COUNTER" class="home">去往vuex</a>
     <a :href="AppUrls.PACKAGE_A" class="home">分包A</a>
+    <a href="/pages/testExtend/main" class="home">测试继承</a>
   </div>
 </template>
-<!--必须指定为ts1-->
+<!--必须指定为ts-->
 <script lang="ts" src="./index.ts">
 </script>
 
