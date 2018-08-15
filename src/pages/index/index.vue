@@ -14,7 +14,9 @@
 </script>
 
 
-<style>
+<style lang="less">
+  @import "./index";
+
   .counter-warp {
     text-align: center;
     margin-top: 100px;
