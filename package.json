@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "debug": "^3.1.0",
-    "mpvue": "^1.0.13",
+    "mpvue": "^1.0.18",
     "vue": "^2.5.16",
     "vue-property-decorator": "^7.0.0",
     "vuex": "^2.3.1"
@@ -52,7 +52,7 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mpvue-entry": "^1.4.7",
-    "mpvue-loader": "^1.1.2",
+    "mpvue-loader": "^1.1.4",
     "mpvue-template-compiler": "^1.0.13",
     "mpvue-webpack-target": "^1.0.1",
     "opn": "^5.1.0",
