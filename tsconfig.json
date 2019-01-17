@@ -18,7 +18,7 @@
       ]
     },
     "types": [
-      "tencent-wx-app"
+      "@types/weixin-app"
     ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
