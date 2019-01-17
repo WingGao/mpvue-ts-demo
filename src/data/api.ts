@@ -46,22 +46,31 @@ function postForm(url, data) {
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
   })
 }
+interface WxApiOpt<T> {
+  success: (res: T) => void
+  fail: (e: any) => void
+}
 
-function wxApiToPromise(api, arg1?) {
+function wxApiToPromise<T>(api: (a: WxApiOpt<T>) => void, arg1?): Promise<T> {
   return new Promise((resolve, reject) => {
-    api(merge({
+    let opt = merge({
       success(r) {
         resolve(r)
       },
       fail(e) {
         reject(e)
       }
-    }, arg1))
+    }, arg1)
+    api(opt)
   })
 }
+
 const Api = {
   login() {
-    return wxApiToPromise(wx.login, {})
+    return wxApiToPromise(wx.login, {}).then(res => {
+      console.log(res.code)
+      return res
+    })
   },
   testForm() {
     return postForm(HOST, { a: 1 })
