@@ -40,6 +40,13 @@ fly.interceptors.response.use(
   }
 )
 
+function postForm(url, data) {
+  return fly.request(url, data, {
+    method: 'post',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+  })
+}
+
 function wxApiToPromise(api, arg1?) {
   return new Promise((resolve, reject) => {
     api(merge({
@@ -55,6 +62,9 @@ function wxApiToPromise(api, arg1?) {
 const Api = {
   login() {
     return wxApiToPromise(wx.login, {})
+  },
+  testForm() {
+    return postForm(HOST, { a: 1 })
   }
 }
 export default Api
