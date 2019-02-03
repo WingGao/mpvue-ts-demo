@@ -9,6 +9,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 // var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var MpvueVendorPlugin = require('webpack-mpvue-vendor-plugin')
 
 var env = config.build.env
 
@@ -83,7 +84,8 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common/manifest',
       chunks: ['common/vendor']
-    })
+    }),
+    new MpvueVendorPlugin()
   ]
 })
 

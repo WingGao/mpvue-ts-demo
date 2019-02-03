@@ -1,5 +1,6 @@
 var path = require('path')
 var fs = require('fs')
+var webpack = require('webpack')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
@@ -81,9 +82,7 @@ module.exports = {
           'babel-loader',
           {
             loader: 'mpvue-loader',
-            options: {
-              checkMPEntry: true
-            }
+            options: Object.assign({ checkMPEntry: true }, vueLoaderConfig)
           },
           {
             // loader: 'ts-loader',
@@ -119,9 +118,7 @@ module.exports = {
           'babel-loader',
           {
             loader: 'mpvue-loader',
-            options: {
-              checkMPEntry: true
-            }
+            options: Object.assign({ checkMPEntry: true }, vueLoaderConfig)
           },
         ]
       },
@@ -152,6 +149,11 @@ module.exports = {
     ]
   },
   plugins: [
+    // api 统一桥协议方案
+    new webpack.DefinePlugin({
+      'mpvue': 'global.mpvue',
+      'mpvuePlatform': 'global.mpvuePlatform'
+    }),
     new MpvuePlugin(),
     // new MpvueEntry(),
     // new CopyWebpackPlugin([{

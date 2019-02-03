@@ -14,7 +14,7 @@
     "debug": "^3.1.0",
     "flyio": "^0.6.9",
     "lodash": "^4.17.11",
-    "mpvue": "^1.0.18",
+    "mpvue": "^1.0.20",
     "vue": "^2.5.16",
     "vue-property-decorator": "^7.0.0",
     "vuex": "^2.3.1"
@@ -55,9 +55,9 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mpvue-entry": "^1.4.7",
-    "mpvue-loader": "^1.1.4",
-    "mpvue-template-compiler": "^1.0.13",
-    "mpvue-webpack-target": "^1.0.1",
+    "mpvue-loader": "^1.2.0",
+    "mpvue-template-compiler": "^1.0.20",
+    "mpvue-webpack-target": "^1.0.3",
     "opn": "^5.1.0",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "ora": "^1.2.0",
@@ -70,6 +70,7 @@
     "shelljs": "^0.7.6",
     "tencent-wx-app": "^1.1.201712221707",
     "typescript": "^2.7.2",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^0.5.8",
     "vue-style-loader": "^3.0.1",
     "webpack": "^2.6.1",
@@ -78,7 +79,8 @@
     "webpack-dev-middleware-hard-disk": "^1.10.0",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^4.1.0",
-    "webpack-mpvue-asset-plugin": "^0.1.1"
+    "webpack-mpvue-asset-plugin": "^0.1.1",
+    "webpack-mpvue-vendor-plugin": "^0.0.1"
   },
   "engines": {
     "node": ">= 4.0.0",
