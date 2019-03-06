@@ -1,18 +1,16 @@
 var path = require('path')
 var fs = require('fs')
-var webpack = require('webpack')
 var utils = require('./utils')
 var config = require('../config')
+var webpack = require('webpack')
+var merge = require('webpack-merge')
 var vueLoaderConfig = require('./vue-loader.conf')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var MpvuePlugin = require('webpack-mpvue-asset-plugin')
 var glob = require('glob')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MpvuePlugin = require('webpack-mpvue-asset-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var relative = require('relative')
 
-// const MpvueEntry = require('mpvue-entry')
-
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -32,18 +30,15 @@ const pagesEntry = getEntry(resolve('./src'))
 const subpackagePagesEntry = getEntry(resolve('./src'), '/packageA/pages/**/main.ts')
 const entry = Object.assign({}, appEntry, pagesEntry, subpackagePagesEntry)
 
-module.exports = {
-  entry: entry, // 如果要自定义生成的 dist 目录里面的文件路径，
-                // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
-                // toPath 为相对于 dist 的路径, 例：index/demo，则生成的文件地址为 dist/index/demo.js
-  // entry: MpvueEntry.getEntry({
-  //   main: 'src/main.ts',
-  //   pages: 'src/pages.js',
-  //   // entry: 'dist',
-  // }),
+let baseWebpackConfig = {
+  // 如果要自定义生成的 dist 目录里面的文件路径，
+  // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
+  // toPath 为相对于 dist 的路径, 例：index/demo，则生成的文件地址为 dist/index/demo.js
+  entry,
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
+    jsonpFunction: 'webpackJsonpMpvue',
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
@@ -56,19 +51,12 @@ module.exports = {
       '@': resolve('src'),
       'debug': resolve('src/utils/debug'),
     },
-    symlinks: false
+    symlinks: false,
+    aliasFields: ['mpvue', 'weapp', 'browser'],
+    mainFields: ['browser', 'module', 'main']
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
       {
         test: /\.vue$/,
         loader: 'mpvue-loader',
@@ -118,7 +106,7 @@ module.exports = {
           'babel-loader',
           {
             loader: 'mpvue-loader',
-            options: Object.assign({ checkMPEntry: true }, vueLoaderConfig)
+            options: Object.assign({checkMPEntry: true}, vueLoaderConfig)
           },
         ]
       },
@@ -155,11 +143,6 @@ module.exports = {
       'mpvuePlatform': 'global.mpvuePlatform'
     }),
     new MpvuePlugin(),
-    // new MpvueEntry(),
-    // new CopyWebpackPlugin([{
-    //   from: resolve('./src/app.json'),
-    //   to: 'app.json'
-    // }]),
     new CopyWebpackPlugin([{
       from: '**/*.json',
       to: ''
@@ -169,9 +152,31 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),
-        to: path.resolve(__dirname, '../dist/static'),
+        to: path.resolve(config.build.assetsRoot, './static'),
         ignore: ['.*']
       }
     ])
   ]
 }
+
+// 针对百度小程序，由于不支持通过 miniprogramRoot 进行自定义构建完的文件的根路径
+// 所以需要将项目根路径下面的 project.swan.json 拷贝到构建目录
+// 然后百度开发者工具将 dist/swan 作为项目根目录打
+const projectConfigMap = {
+  tt: '../project.config.json',
+  swan: '../project.swan.json'
+}
+
+const PLATFORM = process.env.PLATFORM
+if (/^(swan)|(tt)$/.test(PLATFORM)) {
+  baseWebpackConfig = merge(baseWebpackConfig, {
+    plugins: [
+      new CopyWebpackPlugin([{
+        from: path.resolve(__dirname, projectConfigMap[PLATFORM]),
+        to: path.resolve(config.build.assetsRoot)
+      }])
+    ]
+  })
+}
+
+module.exports = baseWebpackConfig

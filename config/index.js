@@ -1,28 +1,38 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
-const _ = require('lodash')
-const path = require('path')
-
-const fileExtConfig = {
-  // swan: {
-  //   template: 'swan',
-  //   script: 'js',
-  //   style: 'css',
-  //   platform: 'swan'
-  // },
+var path = require('path')
+var fileExtConfig = {
+  swan: {
+    template: 'swan',
+    script: 'js',
+    style: 'css',
+    platform: 'swan'
+  },
+  tt: {
+    template: 'ttml',
+    script: 'js',
+    style: 'ttss',
+    platform: 'tt'
+  },
   wx: {
     template: 'wxml',
     script: 'js',
     style: 'wxss',
     platform: 'wx'
+  },
+  my: {
+    template: 'axml',
+    script: 'js',
+    style: 'acss',
+    platform: 'my'
   }
 }
-const fileExt = fileExtConfig[_.defaultTo(process.env.PLATFORM, 'wx')]
+var fileExt = fileExtConfig[process.env.PLATFORM]
 
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    index: path.resolve(__dirname, `../dist/${fileExt.platform}/index.html`),
+    assetsRoot: path.resolve(__dirname, `../dist/${fileExt.platform}`),
     assetsSubDirectory: '',
     assetsPublicPath: '/',
     productionSourceMap: false,

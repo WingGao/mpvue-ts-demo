@@ -10,7 +10,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var MpvueVendorPlugin = require('webpack-mpvue-vendor-plugin')
-
 var env = config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
@@ -33,13 +32,10 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new UglifyJsPlugin({
-      sourceMap: true
-    }),
     // extract css into its own file
     new ExtractTextPlugin({
       // filename: utils.assetsPath('[name].[contenthash].css')
-      filename: utils.assetsPath('[name].wxss')
+      filename: utils.assetsPath(`[name].${config.build.fileExt.style}`)
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
@@ -85,7 +81,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       name: 'common/manifest',
       chunks: ['common/vendor']
     }),
-    new MpvueVendorPlugin()
+    new MpvueVendorPlugin({
+      platform: process.env.PLATFORM
+    })
   ]
 })
 
@@ -110,6 +108,13 @@ var webpackConfig = merge(baseWebpackConfig, {
 if (config.build.bundleAnalyzerReport) {
   var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+var useUglifyJs = process.env.PLATFORM !== 'swan'
+if (useUglifyJs) {
+  webpackConfig.plugins.push(new UglifyJsPlugin({
+    sourceMap: true
+  }))
 }
 
 module.exports = webpackConfig

@@ -29,6 +29,12 @@ Component.registerHooks([
 ])
 
 Vue.config.productionTip = false
+// add this to handle exception
+Vue.config.errorHandler = function (err) {
+  if (console && console.error) {
+    console.error(err)
+  }
+}
 /* app-only-end */
 
 if (isApp) {
