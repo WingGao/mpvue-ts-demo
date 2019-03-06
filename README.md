@@ -1,6 +1,10 @@
-# Mpvue Typescript demo
+# mpvue Typescript demo
 
-> A Mpvue project with Typescript
+> A mpvue project with Typescript
+
+已支持mpvue 2.0
+
+1.x版本的请前往[v1](https://github.com/WingGao/mpvue-ts-demo/tree/v1)分支
 
 ## Build Setup
 
@@ -19,4 +23,4 @@ yarn run build --report
 ```
 
 
-[文档](https://github.com/WingGao/mpvue-docs/blob/develop/docs/build/mpvue-loader.md#typescript%E6%94%AF%E6%8C%81)
+[mpvue](https://github.com/Meituan-Dianping/mpvue)

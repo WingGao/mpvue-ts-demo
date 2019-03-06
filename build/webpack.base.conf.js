@@ -10,7 +10,7 @@ var glob = require('glob')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var relative = require('relative')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -50,6 +50,7 @@ let baseWebpackConfig = {
       'vue': 'mpvue',
       '@': resolve('src'),
       'debug': resolve('src/utils/debug'),
+      'lodash': resolve('vendor/lodash_export'),
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],
@@ -67,7 +68,9 @@ let baseWebpackConfig = {
         // include: [resolve('src'), resolve('test')],
         exclude: /node_modules/,
         use: [
-          'babel-loader',
+          {
+            loader: 'babel-loader',
+          },
           {
             loader: 'mpvue-loader',
             options: Object.assign({ checkMPEntry: true }, vueLoaderConfig)
@@ -106,7 +109,7 @@ let baseWebpackConfig = {
           'babel-loader',
           {
             loader: 'mpvue-loader',
-            options: Object.assign({checkMPEntry: true}, vueLoaderConfig)
+            options: Object.assign({ checkMPEntry: true }, vueLoaderConfig)
           },
         ]
       },
