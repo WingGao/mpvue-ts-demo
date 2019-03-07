@@ -2,7 +2,7 @@
 
 > A mpvue project with Typescript
 
-已支持mpvue 2.0
+已支持mpvue 2.0 （微信小程序、百度智能小程序、头条小程序、支付宝小程序）
 
 1.x版本的请前往[v1](https://github.com/WingGao/mpvue-ts-demo/tree/v1)分支
 
