@@ -17,11 +17,6 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-5.5.0.tgz#146c2a29ee7d3bae4bf2fcb274636e264c813c45"
   integrity sha512-41qEJgBH/TWgo5NFSvBCJ1qkoi3Q6ONSF2avrHq1LVEZfYpdHmj0y9SuTK+u9ZhG1sYQKBL1AWXKyLWP4RaUoQ==
 
-"@types/weixin-app@^2.2.21":
-  version "2.2.25"
-  resolved "https://registry.yarnpkg.com/@types/weixin-app/-/weixin-app-2.2.25.tgz#024c2345e65a7310e14cb64bd8c48a0477259b6d"
-  integrity sha512-vnZ2r6quj7lPEw1D6dYRTaS33rtrHDGr7pWETggxX7DxgCfa7a5sa+l+OFwHUk4z40UecFvDk4vhraBidVB61g==
-
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -6859,6 +6854,10 @@ webpack@^3.11.0:
     watchpack "^1.4.0"
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
+
+wechat-mp-types@banxi1988/wechat-mp-types:
+  version "1.4.4"
+  resolved "https://codeload.github.com/banxi1988/wechat-mp-types/tar.gz/fed28ae787adcd8025c5c5e260cfac3a70097fc4"
 
 whet.extend@~0.9.9:
   version "0.9.9"

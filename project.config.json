@@ -11,6 +11,8 @@
 	"compileType": "miniprogram",
 	"appid": "wx0d2a71485f4888c4",
 	"projectname": "mp_demo",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

@@ -18,7 +18,7 @@
       ]
     },
     "types": [
-      "@types/weixin-app"
+      "wechat-mp-types"
     ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
