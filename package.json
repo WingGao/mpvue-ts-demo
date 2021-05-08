@@ -24,7 +24,7 @@
   "dependencies": {
     "debug": "^3.1.0",
     "flyio": "^0.6.9",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "vue": "^2.5.16",
     "vue-property-decorator": "^7.0.0",
     "mpvue": "^2.0.0",
